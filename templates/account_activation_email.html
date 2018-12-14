@@ -2,7 +2,7 @@
   Hi,
 
   An account was successfully created for {{ user.username }}.
-  Please click on the link below to confirm registration and activate your account at Cornell Food.
+  Please click on the link below to confirm registration and activate your account at PL Apps.
 
   http://{{ domain }}{% url 'user_activate' %}?uidb64={{ uid }}&token={{ utoken }}
 
@@ -11,6 +11,6 @@
   You will need to confirm your email address before you can login.
 
   Sincerely,
-  The Cornell Food Team
+  The PL Team
 
 {% endautoescape %}

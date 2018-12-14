@@ -51,7 +51,7 @@ class SignUpFormView(generic.FormView):
         # uid = new_user.id
 
         current_site = get_current_site(self.request)
-        mail_subject = 'Activate your Cornell Food account.'
+        mail_subject = settings.USER_SIGNUP_EMAIL_SUBJECT
         message = render_to_string('account_activation_email.html', {
             'user': new_user,
             'domain': current_site.domain,
@@ -145,7 +145,7 @@ class ContactFormView(generic.FormView):
         content = form.cleaned_data.get('content')
         user_subject = form.cleaned_data.get('subject')
         email = form.cleaned_data.get('email')
-        mail_subject = 'Cornell Food Website Contact Us Message'
+        mail_subject = 'PL Apps Website Contact Us Message'
         message = render_to_string('contact_email.html', {
             'fullname': fullname,
             'user_subject': user_subject,

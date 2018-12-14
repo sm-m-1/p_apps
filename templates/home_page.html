@@ -3,6 +3,14 @@
 
 {% block content %}
   <div class="container mt-5">
+  {% if request.user.is_authenticated %}
+      <div class="card center-block" style="width: 35rem;">
+      <h1 class="card-header my-0">Welcome</h1>
+      <div class="card-body">
+        <h3>Hi, {{ request.user.username }}</h3>
+      </div>
+    </div>
+    {% endif %}
     <div class="card center-block" style="width: 35rem;">
       <h1 class="card-header my-0">This is the home page</h1>
       <div class="card-body">

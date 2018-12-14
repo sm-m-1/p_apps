@@ -51,12 +51,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_REDIRECT_URL = 'home'
+USE_TZ = True
+TIME_ZONE = 'America/New_York'
+
 # Email Related Settings.
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = 'blob'
-DEFAULT_FROM_EMAIL = 'p-apps-info@smmashuq.com'
+DEFAULT_FROM_EMAIL = 'PL-apps-info@plapps50.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+USER_SIGNUP_EMAIL_SUBJECT = 'Activate your PL Apps account.'
 
 ROOT_URLCONF = 'p_apps.urls'
 
@@ -127,3 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    # ignore the existence of local_settings in production
+    pass
