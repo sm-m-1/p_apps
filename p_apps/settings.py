@@ -51,6 +51,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Email Related Settings.
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = 'blob'
 DEFAULT_FROM_EMAIL = 'p-apps-info@smmashuq.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
