@@ -4,3 +4,8 @@ from .celery import app
 @app.task
 def add(x, y):
     return x + y
+
+@app.task
+def fib(n):
+    if n <= 1: return n
+    return fib(n-2) + fib(n-1)
