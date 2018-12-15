@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     'email_future',
     'widget_tweaks',
-    'django_celery_results',
+    # 'django_celery_results',
 ]
 
 MIDDLEWARE = [
