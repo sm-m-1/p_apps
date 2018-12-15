@@ -9,8 +9,6 @@ BROKER_POOL_LIMIT = 1
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'p_apps.settings')
-broker_pool_limit = 1 # Will decrease connection usage
-broker_heartbeat = None # We're using TCP keep-alive instead
 
 app = Celery('p_apps')
 # app = Celery('mysite', broker='pyamqp://guest@localhost//')
@@ -18,7 +16,7 @@ app = Celery('p_apps')
 # app.conf.update(BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'),
 #                 CELERY_RESULT_BACKEND=os.environ.get('CLOUDAMQP_URL', ''))
 app.conf.update(
-    BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'),
+    BROKER_URL=os.environ.get('REDIS_URL', 'amqp://guest:guest@localhost//'),
     CELERY_ACCEPT_CONTENT = ['json'],
     CELERY_TASK_SERIALIZER = 'json',
     CELERY_RESULT_SERIALIZER = 'json',
