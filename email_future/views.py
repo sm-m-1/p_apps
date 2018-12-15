@@ -43,26 +43,26 @@ class EmailAppFormView(generic.FormView):
             'sender_name': sender_name,
             'sender_email': sender_email,
         })
-        print("message: ", message)
+        # print("message: ", message)
 
-        print("to_email: ", recipient_email)
-        # send_mail_wrapper.apply_async(
-        #     (
-        #     email_subject,
-        #     message,
-        #     settings.DEFAULT_FROM_EMAIL,
-        #     [recipient_email],
-        #     False
-        #     ),
-        #     eta=eta_input_datetime
-        # )
-        send_mail_wrapper.delay(
+        # print("to_email: ", recipient_email)
+        send_mail_wrapper.apply_async(
+            (
             email_subject,
             message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient_email],
             False
+            ),
+            eta=eta_input_datetime
         )
+        # send_mail_wrapper.delay(
+        #     email_subject,
+        #     message,
+        #     settings.DEFAULT_FROM_EMAIL,
+        #     [recipient_email],
+        #     False
+        # )
         # send_mail(
         #     email_subject,
         #     message,settings.DEFAULT_FROM_EMAIL,
