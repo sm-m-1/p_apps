@@ -26,6 +26,8 @@ from accounts.views import (
 from django.contrib.auth import views as auth_views
 from home.views import HomePageView
 
+from email_future.views import EmailAppFormView, email_form_success
+
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('admin/', admin.site.urls),
@@ -45,4 +47,9 @@ urlpatterns = [
     path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('accounts/password_reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+    # email app
+    path('email/', EmailAppFormView.as_view(), name='email_app'),
+    path('email/success', email_form_success, name='email_form_success'),
+
 ]

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'widget_tweaks'
+    'email_future',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -52,8 +53,6 @@ MIDDLEWARE = [
 ]
 
 LOGIN_REDIRECT_URL = 'home'
-USE_TZ = True
-TIME_ZONE = 'America/New_York'
 
 # Email Related Settings.
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
@@ -119,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 

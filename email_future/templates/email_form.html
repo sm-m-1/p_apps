@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Write Email{% endblock %}
+{% block content %}
+  <div class="container mt-5">
+    <div class="row">
+        <div class="card mx-auto" style="width: 45rem;">
+          <h2 class="card-header my-0">Send a Future Email</h2>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              {#          {{ form.as_p }}#}
+
+              <div class="form-group">
+                <label for="{{ form.email_subject.id_for_label }}">Email subject:</label>
+                {% render_field form.email_subject class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.email_message.id_for_label }}">Email message:</label>
+                {% render_field form.email_message class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.recipient_email.id_for_label }}">Recipient email:</label>
+                {% render_field form.recipient_email class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.sender_email.id_for_label }}">Your email:</label>
+                {% render_field form.sender_email class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.sender_name.id_for_label }}">Your name:</label>
+                {% render_field form.sender_name class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.eta_date.id_for_label }}">Date:</label>
+                {#            <input type="date">#}
+                {% render_field form.eta_date type="date" class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.eta_time.id_for_label }}">Time:</label>
+                {% render_field form.eta_time type="time" class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.sending_timezone.id_for_label }}">Timezone:</label>
+                {% render_field form.sending_timezone type="time" class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <h6 class="text-danger list-group-item-danger">
+                  {{ form.errors }}
+                  {{ form.fullname.errors }}
+                  {{ form.non_field_errors }}
+                </h6>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}
