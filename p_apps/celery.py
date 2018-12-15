@@ -16,7 +16,7 @@ app = Celery('p_apps')
 # app.conf.update(BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'),
 #                 CELERY_RESULT_BACKEND=os.environ.get('CLOUDAMQP_URL', ''))
 app.conf.update(
-    BROKER_URL=os.environ.get('REDIS_URL', 'amqp://guest:guest@localhost//'),
+    BROKER_URL=os.environ.get('REDIS_URL', 'pyamqp://guest@localhost//'),
     CELERY_ACCEPT_CONTENT = ['json'],
     CELERY_TASK_SERIALIZER = 'json',
     CELERY_RESULT_SERIALIZER = 'json',
