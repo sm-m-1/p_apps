@@ -174,8 +174,8 @@ DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # heroku settings end.
 
-# try:
-#     from .local_settings import *
-# except ImportError as e:
-#     # ignore the existence of local_settings in production
-#     pass
+try:
+    from .local_settings import *
+except ImportError as e:
+    # ignore the existence of local_settings in production
+    pass
