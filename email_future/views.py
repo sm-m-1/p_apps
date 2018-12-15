@@ -56,12 +56,21 @@ class EmailAppFormView(generic.FormView):
         #     ),
         #     eta=eta_input_datetime
         # )
-        send_mail(
-            email_subject,
-            message,settings.DEFAULT_FROM_EMAIL,
-            [recipient_email],
-            False
+        send_mail_wrapper.delay(
+            (
+                email_subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [recipient_email],
+                False
+            )
         )
+        # send_mail(
+        #     email_subject,
+        #     message,settings.DEFAULT_FROM_EMAIL,
+        #     [recipient_email],
+        #     False
+        # )
 
         return valid
 
