@@ -60,8 +60,8 @@ MIDDLEWARE = [
 # celery things
 # CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_BACKEND = 'django-cache'
-broker_pool_limit = 1 # Will decrease connection usage
-broker_heartbeat = None # We're using TCP keep-alive instead
+BROKER_POOL_LIMIT = None # Will decrease connection usage
+# broker_heartbeat = None # We're using TCP keep-alive instead
 
 
 LOGIN_REDIRECT_URL = 'home'
