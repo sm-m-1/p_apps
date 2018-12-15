@@ -66,7 +66,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Email Related Settings.
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = 'blob'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY','blob')
 DEFAULT_FROM_EMAIL = 'PL-apps-info@plapps50.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
@@ -166,15 +166,15 @@ DATABASES = {
 }
 
 # heroku settings begin.
-django_heroku.settings(locals())
-prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(prod_db_settings)
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+# django_heroku.settings(locals())
+# prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'].update(prod_db_settings)
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # heroku settings end.
 
-try:
-    from .local_settings import *
-except ImportError as e:
-    # ignore the existence of local_settings in production
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError as e:
+#     # ignore the existence of local_settings in production
+#     pass
