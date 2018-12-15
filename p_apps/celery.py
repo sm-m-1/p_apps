@@ -22,6 +22,7 @@ app.conf.update(
     broker_connection_timeout = 30, # May require a long timeout due to Linux DNS timeouts etc
     # result_backend = 'django-cache', # AMQP is not recommended as result backend as it creates thousands of queues
     result_backend='rpc', # AMQP is not recommended as result backend as it creates thousands of queues
+    result_persistent = False,
     event_queue_expires = 60, # Will delete all celeryev. queues without consumers after 1 minute.
     worker_prefetch_multiplier = 1, # Disable prefetching, it's causes problems and doesn't help performance
     worker_concurrency = 50,
