@@ -13,7 +13,12 @@ app = Celery('p_apps')
 # app = Celery('p_apps', broker=os.environ['REDIS_URL'])
 # app.conf.update(BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'),
 #                 CELERY_RESULT_BACKEND=os.environ.get('CLOUDAMQP_URL', ''))
-app.conf.update(BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'))
+app.conf.update(
+    BROKER_URL=os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//'),
+    CELERY_ACCEPT_CONTENT = ['json'],
+    CELERY_TASK_SERIALIZER = 'json',
+    CELERY_RESULT_SERIALIZER = 'json',
+)
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
