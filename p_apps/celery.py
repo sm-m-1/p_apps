@@ -1,5 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
+from datetime import timedelta
+
 from celery import Celery
 from p_apps import settings
 
@@ -18,6 +20,12 @@ app.conf.update(
     CELERY_ACCEPT_CONTENT = ['json'],
     CELERY_TASK_SERIALIZER = 'json',
     CELERY_RESULT_SERIALIZER = 'json',
+    CELERYBEAT_SCHEDULE={
+        'periodic_task': {
+            'task': 'task_polling',
+            'schedule': timedelta(seconds=1),
+        },
+    },
 )
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
