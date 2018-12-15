@@ -1,4 +1,6 @@
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
+from datetime import datetime
+
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
 
@@ -9,6 +11,7 @@ from django.views import generic
 
 from p_apps import settings
 from .forms import UserEmailorm
+from .tasks import send_mail_wrapper
 
 
 class EmailAppFormView(generic.FormView):
@@ -34,8 +37,7 @@ class EmailAppFormView(generic.FormView):
         eta_time = form.cleaned_data.get('eta_time')
         sending_timezone = form.cleaned_data.get('sending_timezone')
         print("sending_timezone: ", sending_timezone)
-        # sending_time = form.cleaned_data.get('sending_time')
-
+        eta_input_datetime = form.cleaned_data.get('eta_input_datetime')
         message = render_to_string('email.html', {
             'email_message': email_message,
             'sender_name': sender_name,
@@ -44,13 +46,17 @@ class EmailAppFormView(generic.FormView):
         print("message: ", message)
 
         print("to_email: ", recipient_email)
-        # send_mail(
-        #     email_subject,
-        #     message,
-        #     settings.DEFAULT_FROM_EMAIL,
-        #     [recipient_email],
-        #     fail_silently=False
-        # )
+        send_mail_wrapper.apply_async(
+            (
+            email_subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [recipient_email],
+            False
+            ),
+            eta=eta_input_datetime
+        )
+
         return valid
 
     def get_success_url(self):

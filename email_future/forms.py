@@ -35,5 +35,5 @@ class UserEmailorm(ModelForm):
         # make sure that the use has enterdied a time into the future
         if eta_input_datetime < now_datetime:
             raise forms.ValidationError("You can not select a time in the past!")
-
+        data['eta_input_datetime'] = eta_input_datetime
         return data
