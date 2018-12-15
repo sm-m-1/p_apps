@@ -45,7 +45,7 @@ class EmailAppFormView(generic.FormView):
         })
         # print("message: ", message)
 
-        # print("to_email: ", recipient_email)
+        print("eta_input_datetime: ", eta_input_datetime)
         # send_mail_wrapper.apply_async(
         #     (
         #     email_subject,

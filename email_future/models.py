@@ -56,7 +56,7 @@ class UserEmail(models.Model):
     sender_email = models.EmailField(null=False)
     sending_time = models.DateTimeField(null=False)
     sending_timezone = TimeZoneField(
-        null=False,
+        null=True,
         choices=add_gmt_offset_to_choices()
     )
 
