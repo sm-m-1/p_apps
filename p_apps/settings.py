@@ -59,6 +59,7 @@ MIDDLEWARE = [
 
 # celery things
 CELERY_RESULT_BACKEND = 'django-db'
+BROKER_POOL_LIMIT = 1
 # CELERY_RESULT_BACKEND = 'django-cache'
 
 
