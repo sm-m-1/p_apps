@@ -61,7 +61,7 @@ MIDDLEWARE = [
 CELERY_RESULT_BACKEND = 'django-db'
 # CELERY_RESULT_BACKEND = 'django-cache'
 # CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
-BROKER_POOL_LIMIT = None # Will decrease connection usage
+BROKER_POOL_LIMIT = 1 # Will decrease connection usage
 broker_heartbeat = None # We're using TCP keep-alive instead
 
 
