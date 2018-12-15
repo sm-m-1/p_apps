@@ -44,6 +44,7 @@ def get_formatted_timezone_set():
     timezones = pytz.common_timezones_set
     timezones = [(t, t) for t in timezones]
     timezones.sort(reverse=True)
+    # timezones = [(pytz.timezone(t), t) for t in timezones]
     return timezones[:20]
 
 
@@ -56,7 +57,7 @@ class UserEmail(models.Model):
     sending_time = models.DateTimeField(null=False)
     sending_timezone = TimeZoneField(
         null=False,
-        display_GMT=True
+        choices=add_gmt_offset_to_choices()
     )
 
 

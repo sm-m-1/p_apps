@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'email_future',
     'widget_tweaks',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# celery things
+CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_RESULT_BACKEND = 'django-cache'
+
 
 LOGIN_REDIRECT_URL = 'home'
 
