@@ -1,4 +1,4 @@
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
 from datetime import datetime
 
 from django.http import HttpResponseForbidden
@@ -46,15 +46,21 @@ class EmailAppFormView(generic.FormView):
         print("message: ", message)
 
         print("to_email: ", recipient_email)
-        send_mail_wrapper.apply_async(
-            (
+        # send_mail_wrapper.apply_async(
+        #     (
+        #     email_subject,
+        #     message,
+        #     settings.DEFAULT_FROM_EMAIL,
+        #     [recipient_email],
+        #     False
+        #     ),
+        #     eta=eta_input_datetime
+        # )
+        send_mail(
             email_subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
+            message,settings.DEFAULT_FROM_EMAIL,
             [recipient_email],
             False
-            ),
-            eta=eta_input_datetime
         )
 
         return valid
