@@ -9,6 +9,8 @@ BROKER_POOL_LIMIT = 1
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'p_apps.settings')
+broker_pool_limit = 1 # Will decrease connection usage
+broker_heartbeat = None # We're using TCP keep-alive instead
 
 app = Celery('p_apps')
 # app = Celery('mysite', broker='pyamqp://guest@localhost//')
@@ -20,12 +22,6 @@ app.conf.update(
     CELERY_ACCEPT_CONTENT = ['json'],
     CELERY_TASK_SERIALIZER = 'json',
     CELERY_RESULT_SERIALIZER = 'json',
-    CELERYBEAT_SCHEDULE={
-        'periodic_task': {
-            'task': 'task_polling',
-            'schedule': timedelta(seconds=1),
-        },
-    },
 )
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
