@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,12 +94,12 @@ WSGI_APPLICATION = 'p_apps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -137,7 +139,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"), # needed for Django server
+    # os.path.join(BASE_DIR, "build/static"), # needed for React app
+    # '/var/www/static/',
+]
+
+# heroku settings
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'HOST': os.environ['DATABASE_HOST'],
+        'PORT': '5432',
+    }
+}
+
+DATABASES['default'] = dj_database_url.config()
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+django_heroku.settings(locals())
+
+# heroku settings end.
 
 try:
     from .local_settings import *
