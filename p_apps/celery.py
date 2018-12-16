@@ -34,7 +34,7 @@ app.conf.update(
 app.conf.beat_schedule = {
     'add-every-30-seconds': {
         'task': 'p_apps.tasks.add',
-        'schedule': 5.0,
+        'schedule': timedelta(minutes=23),
         'args': (16, 16)
     },
 }
