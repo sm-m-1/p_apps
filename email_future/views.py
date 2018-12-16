@@ -46,23 +46,23 @@ class EmailAppFormView(generic.FormView):
         # print("message: ", message)
 
         print("eta_input_datetime: ", eta_input_datetime)
-        # send_mail_wrapper.apply_async(
-        #     (
-        #     email_subject,
-        #     message,
-        #     settings.DEFAULT_FROM_EMAIL,
-        #     [recipient_email],
-        #     False
-        #     ),
-        #     eta=eta_input_datetime
-        # )
-        send_mail_wrapper.delay(
+        send_mail_wrapper.apply_async(
+            (
             email_subject,
             message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient_email],
             False
+            ),
+            eta=eta_input_datetime
         )
+        # send_mail_wrapper.delay(
+        #     email_subject,
+        #     message,
+        #     settings.DEFAULT_FROM_EMAIL,
+        #     [recipient_email],
+        #     False
+        # )
         # send_mail(
         #     email_subject,
         #     message,settings.DEFAULT_FROM_EMAIL,
