@@ -27,7 +27,7 @@ app.conf.update(
     result_persistent = False,
     event_queue_expires = 60, # Will delete all celeryev. queues without consumers after 1 minute.
     worker_prefetch_multiplier = 1, # Disable prefetching, it's causes problems and doesn't help performance
-    worker_concurrency = 1,
+    worker_concurrency = 3,
 )
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
