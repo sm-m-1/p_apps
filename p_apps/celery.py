@@ -29,15 +29,15 @@ app.conf.update(
     event_queue_expires = 60, # Will delete all celeryev. queues without consumers after 1 minute.
     worker_prefetch_multiplier = 1, # Disable prefetching, it's causes problems and doesn't help performance
     worker_concurrency = 3,
-    beat_schedule = {
-        'add-every-30-seconds': {
-            'task': 'tasks.add',
-            'schedule': 30.0,
-            'args': (16, 16)
-        },
-    }
 
 )
+app.conf.beat_schedule = {
+    'add-every-30-seconds': {
+        'task': 'p_apps.tasks.add',
+        'schedule': 5.0,
+        'args': (16, 16)
+    },
+}
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys
