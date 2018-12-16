@@ -5,7 +5,8 @@ from datetime import timedelta
 from celery import Celery
 from p_apps import settings
 
-# BROKER_POOL_LIMIT = 1
+SECURE_SSL_REDIRECT = True
+
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'p_apps.settings')
