@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'p_apps',
     'accounts',
     'email_future',
+    'text_analyzer',
     'widget_tweaks',
     # 'django_celery_results',
     # 'django_celery_beat',
