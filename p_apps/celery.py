@@ -33,9 +33,9 @@ app.conf.update(
 )
 app.conf.beat_schedule = {
     'add-every-30-seconds': {
-        'task': 'p_apps.tasks.add',
-        'schedule': timedelta(minutes=23),
-        'args': (16, 16)
+        'task': 'p_apps.tasks.make_self_request',
+        'schedule': timedelta(minutes=22),
+        'args': ()
     },
 }
 # Using a string here means the worker doesn't have to serialize
