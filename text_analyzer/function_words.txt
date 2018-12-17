@@ -132,3 +132,42 @@ yet 272
 you 273
 your 274
 yours 275 yourself 276 yourselves 277
+
+about
+above
+across
+after
+against
+among
+around
+at
+before
+behind
+below
+beside
+between
+by
+down
+during
+except
+for
+from
+in
+inside
+into
+near
+of
+off
+on
+out
+over
+through
+to
+toward
+under
+up
+with
+the
+a
+s
+
