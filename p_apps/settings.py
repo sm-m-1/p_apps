@@ -29,8 +29,8 @@ SECRET_KEY = 'x_#ip7$*b_imcul#!kf%1r-3mr95$o18td-7j7d&@x37@@2*d0'
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'https://boiling-headland-86603.herokuapp.com/',
     'http://www.pacoapps.com/',
-
 ]
 
 
