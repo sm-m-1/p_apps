@@ -20,12 +20,10 @@ def get_web_page_text(url):
 class TextAnalyzer():
     def __init__(self, phrase_list):
         self.phrase_list = phrase_list
-        self.real_words = []
-        self.filtered_words = []
-        self.word_count = 0
-        self.sentence_count = 0
-        self.word_counter = None
-        self.filtered_word_counter = None
+        self.text = []
+        self.filtered_text = []
+        self.text_counter = None
+        self.filtered_text_counter = None
         self.syllable_counter = None
         self.filtered_syllable_counter = None
         self._process_data()
@@ -36,32 +34,40 @@ class TextAnalyzer():
         the appropriate member variables.
         :return: none
         """
-        self.real_words = self._extract_real_words(self.phrase_list)
-        self.word_count = len(self.real_words)
-        self.sentence_count = self._calculate_total_sentences()
-        self.word_counter = Counter(self.real_words)
-        self.filtered_words = self._extract_filtered_words(self.real_words)
-        self.filtered_word_counter = Counter(self.filtered_words)
+        self.text = self._extract_real_words(self.phrase_list)
+        self.text_counter = Counter(self.text)
+        self.filtered_text = self._extract_filtered_words(self.text)
+        self.filtered_text_counter = Counter(self.filtered_text)
         self.syllable_counter = self._get_word_syllable_counter()
         self.filtered_syllable_counter = self._get_word_syllable_counter(filter=True)
 
-
     def get_unique_word_count(self):
-        return len(self.word_counter)
+        return len(self.text_counter)
+
+    def get_filtered_unique_word_count(self):
+        return len(self.filtered_text_counter)
 
     def get_lexical_density(self):
         # Lexical Density.
         # What words are should be counted: http://www.analyzemywriting.com/lexical_density.html
-        return len(self.filtered_words) / len(self.real_words)
+        return len(self.filtered_text) / len(self.text)
+
+    @property
+    def words_in_text(self):
+        return len(self.text)
+
+    @property
+    def sentences_in_text(self):
+        return self._calculate_total_sentences()
 
     def _get_word_syllable_counter(self, filter=False):
         counter = Counter()
         if filter:
-            for word in self.filtered_words:
+            for word in self.filtered_text:
                 syllables = self._count_syllable_in_word(word)
                 counter[syllables] += 1
         else:
-            for word in self.real_words:
+            for word in self.text:
                 syllables = self._count_syllable_in_word(word)
                 counter[syllables] += 1
         return counter
@@ -94,14 +100,14 @@ class TextAnalyzer():
                 words.append(word)
         return words
 
-    def _extract_filtered_words(self, list):
+    def _extract_filtered_words(self, word_list):
         """
         This function takes a list of words and discards words that are
         commonly occurring jargon words, function words, etc.
         :param list: a list of str values. Each str is a word
         :return: a list of words
         """
-        return [w for w in self.real_words if w not in FUNCTION_WORDS]
+        return [w for w in word_list if w not in FUNCTION_WORDS]
 
 
 class CustomHTMLParser(HTMLParser):
