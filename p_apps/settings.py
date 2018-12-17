@@ -28,7 +28,10 @@ SECRET_KEY = 'x_#ip7$*b_imcul#!kf%1r-3mr95$o18td-7j7d&@x37@@2*d0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'http://www.pacoapps.com/',
+
+]
 
 
 # Application definition

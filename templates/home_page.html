@@ -11,10 +11,21 @@
       </div>
     </div>
     {% endif %}
-    <div class="card center-block" style="width: 35rem;">
-      <h1 class="card-header my-0">This is the home page</h1>
-      <div class="card-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A assumenda at et facere fuga fugit hic impedit, ipsam iusto labore maxime omnis quasi, quidem quisquam sed voluptatem voluptatibus? Amet, numquam?</p>
+    <div class="container">
+      <div class="row">
+        <div class="card mx-auto my-5" style="width: 20rem;">
+        <a href="{% url 'email_app' %}">
+          <img class="card-img-top" src="/static/email_logo.png" alt="email_">
+        </a>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">Future Email</h5>
+          <p class="card-text">
+            A web app that allows users to send an email in future with a specified time.
+          </p>
+          <p>Built with Django, Celery, RabbitMQ</p>
+          <a href="{% url 'email_app' %}" class="btn btn-primary mt-auto">Visit the web app!</a>
+        </div>
+      </div>
       </div>
     </div>
   </div>
