@@ -6,16 +6,14 @@ from .corpus import FUNCTION_WORDS
 
 def get_web_page_text(url):
     """
-    This function takes a url and returns a list of all the real words that
-    appear in the given url. Real words meaning the text from the given url
-    after ignoring HTML tags, spaces, new line '\n' character etc.
+    This function takes a url and returns the cleaned data of response.
     :param url: a url
-    :return: a list of words
+    :return: a list of phrases
     """
     response = requests.get(url)
     parser = CustomHTMLParser()
     parser.feed(response.text)
-    words = parser.get_real_words()
+    words = parser.get_cleaned_data()
     return words
 
 
@@ -29,10 +27,18 @@ class TextAnalyzer():
         self.words_counter_filtered = None
         self._process_data()
 
-    def get_words_counter(self):
+    def get_word_count(self):
+        """
+
+        :return: Counter
+        """
         return self.word_count
 
     def get_words_counter_filtered(self):
+        """
+
+        :return: Counter
+        """
         return self.words_counter_filtered
 
     def get_real_words(self):
@@ -64,13 +70,12 @@ class TextAnalyzer():
 
     def _extract_words(self, list):
         """
-        This function takes a list and returns a list of all the real words that
+        This function takes a list of text and returns a list of all the real words that
         appear in the given list. Real words means ignoring special characters
         such as new line '\n' character, '[*]' etc.
         :return: a list of words
         """
         words = []
-        print("list: ", list)
         for text in list:
             sentence_list = re.findall("[a-z0-9']+", text.lower())
             for word in sentence_list:
