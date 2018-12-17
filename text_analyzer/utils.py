@@ -25,7 +25,9 @@ class TextAnalyzer():
         self.word_count = 0
         self.sentence_count = 0
         self.word_counter = None
-        self.word_counter_filtered = None
+        self.filtered_word_counter = None
+        self.syllable_counter = None
+        self.filtered_syllable_counter = None
         self._process_data()
 
     def _process_data(self):
@@ -39,33 +41,37 @@ class TextAnalyzer():
         self.sentence_count = self._calculate_total_sentences()
         self.word_counter = Counter(self.real_words)
         self.filtered_words = self._extract_filtered_words(self.real_words)
-        self.word_counter_filtered = Counter(self.filtered_words)
+        self.filtered_word_counter = Counter(self.filtered_words)
+        self.syllable_counter = self._get_word_syllable_counter()
+        self.filtered_syllable_counter = self._get_word_syllable_counter(filter=True)
 
-    def get_word_count(self):
-        """
 
-        :return: Counter
-        """
-        return self.word_count
-
-    def get_word_counter_filtered(self):
-        """
-
-        :return: Counter
-        """
-        return self.word_counter_filtered
-
-    def get_real_words(self):
-        """
-        Gets the list of real words in the response.
-        :return: a list
-        """
-        return self.real_words
+    def get_unique_word_count(self):
+        return len(self.word_counter)
 
     def get_lexical_density(self):
         # Lexical Density.
         # What words are should be counted: http://www.analyzemywriting.com/lexical_density.html
         return len(self.filtered_words) / len(self.real_words)
+
+    def _get_word_syllable_counter(self, filter=False):
+        counter = Counter()
+        if filter:
+            for word in self.filtered_words:
+                syllables = self._count_syllable_in_word(word)
+                counter[syllables] += 1
+        else:
+            for word in self.real_words:
+                syllables = self._count_syllable_in_word(word)
+                counter[syllables] += 1
+        return counter
+
+    def _count_syllable_in_word(self, word):
+        vowels = {'a', 'e', 'i', 'o', 'u'}
+        syllables = 0
+        for c in word:
+            if c in vowels: syllables += 1
+        return syllables
 
     def _calculate_total_sentences(self):
         count = 0
