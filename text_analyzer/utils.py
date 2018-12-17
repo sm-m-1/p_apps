@@ -21,11 +21,25 @@ class TextAnalyzer():
     def __init__(self, phrase_list):
         self.phrase_list = phrase_list
         self.real_words = []
+        self.filtered_words = []
         self.word_count = 0
         self.sentence_count = 0
-        self.words_counter = None
-        self.words_counter_filtered = None
+        self.word_counter = None
+        self.word_counter_filtered = None
         self._process_data()
+
+    def _process_data(self):
+        """
+        This function does some processing of data and sets
+        the appropriate member variables.
+        :return: none
+        """
+        self.real_words = self._extract_real_words(self.phrase_list)
+        self.word_count = len(self.real_words)
+        self.sentence_count = self._calculate_total_sentences()
+        self.word_counter = Counter(self.real_words)
+        self.filtered_words = self._extract_filtered_words(self.real_words)
+        self.word_counter_filtered = Counter(self.filtered_words)
 
     def get_word_count(self):
         """
@@ -34,12 +48,12 @@ class TextAnalyzer():
         """
         return self.word_count
 
-    def get_words_counter_filtered(self):
+    def get_word_counter_filtered(self):
         """
 
         :return: Counter
         """
-        return self.words_counter_filtered
+        return self.word_counter_filtered
 
     def get_real_words(self):
         """
@@ -48,19 +62,8 @@ class TextAnalyzer():
         """
         return self.real_words
 
-    def _process_data(self):
-        """
-        This function does some processing of data and sets
-        the appropriate member variables.
-        :return: none
-        """
-        self.real_words = self._extract_words(self.phrase_list)
-        self.word_count = len(self.real_words)
-        self.sentence_count = self._calculate_total_sentences()
-        self.words_counter = Counter(self.real_words)
-        filtered_words = [w for w in self.real_words if w not in FUNCTION_WORDS]
-        self.words_counter_filtered = Counter(filtered_words)
-
+    def get_complexity_factor(self):
+        return
 
     def _calculate_total_sentences(self):
         count = 0
@@ -68,11 +71,12 @@ class TextAnalyzer():
             count += p.count(".")
         return count
 
-    def _extract_words(self, list):
+    def _extract_real_words(self, list):
         """
         This function takes a list of text and returns a list of all the real words that
         appear in the given list. Real words means ignoring special characters
-        such as new line '\n' character, '[*]' etc.
+        such as new line '\n' character, '[*]', etc.
+        :param list: a list of str values. str can be sentences.
         :return: a list of words
         """
         words = []
@@ -82,6 +86,14 @@ class TextAnalyzer():
                 words.append(word)
         return words
 
+    def _extract_filtered_words(self, list):
+        """
+        This function takes a list of words and discards words that are
+        commonly occurring jargon words, function words, etc.
+        :param list: a list of str values. Each str is a word
+        :return: a list of words
+        """
+        return [w for w in self.real_words if w not in FUNCTION_WORDS]
 
 
 class CustomHTMLParser(HTMLParser):
