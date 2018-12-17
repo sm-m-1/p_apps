@@ -62,8 +62,10 @@ class TextAnalyzer():
         """
         return self.real_words
 
-    def get_complexity_factor(self):
-        return
+    def get_lexical_density(self):
+        # Lexical Density.
+        # What words are should be counted: http://www.analyzemywriting.com/lexical_density.html
+        return len(self.filtered_words) / len(self.real_words)
 
     def _calculate_total_sentences(self):
         count = 0
