@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Text Analyzer {% endblock %}
+
+{% block content %}
+
+  <div class="container my-4">
+    <div class="row">
+      <div class="card mx-auto" style="width: 45rem;">
+        <h2 class="card-header my-0">Text Analyzer</h2>
+        <div class="card-body">
+          <form method="get" action="{% url 'text_analyzer' %}" class="">
+            <div class="form-group">
+              <label for="user_essay"> Enter Your Text to analyze:</label>
+              <textarea class="form-control" name="user_essay" id="user_essay" rows="5"
+                        placeholder="Enter text.."
+              >{% if user_essay %}{{ user_essay }}{% endif %}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="user_url">Enter URL of Text to analyze:</label>
+              <input placeholder="A valid url.." class="form-control" name="user_url" id="user_url"
+                     type="url"
+                      value="{% if user_url %}{{ user_url }}{% endif %}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Analyze</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock %}
