@@ -1,11 +1,10 @@
 import re
+
 def generate_list_of_function_words(old_file, new_file):
     '''\
-    Read a list of names from a file line by line into an output file.
-    If a line begins with a particular name, insert a string of text
-    after the name before appending the line to the output file.
+    Read a list of words from a file line by line only extracting words.
+    The the new word set in a new file.
     '''
-
     size = 0
     new_words = []
     with open(old_file, 'r') as read_file:
