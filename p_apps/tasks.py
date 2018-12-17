@@ -14,6 +14,6 @@ def fib(n):
 
 @app.task
 def make_self_request():
-    url = "https://boiling-headland-86603.herokuapp.com/"
+    url = "https://pacoapps.herokuapp.com/"
     contents = urllib.request.urlopen(url)
     contents.readlines()
