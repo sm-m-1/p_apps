@@ -30,6 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://boiling-headland-86603.herokuapp.com/',
+    'https://pacoapps.herokuapp.com/',
     'http://www.pacoapps.com/',
 ]
 
@@ -70,7 +71,7 @@ LOGIN_REDIRECT_URL = 'home'
 # Email Related Settings.
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY','blob')
-DEFAULT_FROM_EMAIL = 'PL-apps-info@plapps50.com'
+DEFAULT_FROM_EMAIL = 'PacoApps-info@pacoapps.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 USER_SIGNUP_EMAIL_SUBJECT = 'Activate your PL Apps account.'
