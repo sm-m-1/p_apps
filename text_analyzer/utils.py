@@ -10,7 +10,7 @@ def get_web_page_text(url):
     :param url: a url
     :return: a list of phrases
     """
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     parser = CustomHTMLParser()
     parser.feed(response.text)
     words = parser.get_cleaned_data()
@@ -41,24 +41,37 @@ class TextAnalyzer():
         self.syllable_counter = self._get_word_syllable_counter()
         self.filtered_syllable_counter = self._get_word_syllable_counter(filter=True)
 
-    def get_unique_word_count(self):
-        return len(self.text_counter)
 
     def get_filtered_unique_word_count(self):
         return len(self.filtered_text_counter)
 
-    def get_lexical_density(self):
+    @property
+    def text_lexical_density(self):
         # Lexical Density.
         # What words are should be counted: http://www.analyzemywriting.com/lexical_density.html
-        return len(self.filtered_text) / len(self.text)
+        result = len(self.filtered_text) / len(self.text)
+        return str(int(result * 100) / 100) + "%"
+    def get_text_word_frequency(self):
+        return self.text_counter.most_common(20)
+
+    def get_filtered_text_word_frequency(self):
+        return self.filtered_text_counter.most_common(20)
 
     @property
     def words_in_text(self):
         return len(self.text)
 
     @property
+    def unique_words_in_text(self):
+        return len(self.text_counter)
+
+    @property
     def sentences_in_text(self):
         return self._calculate_total_sentences()
+
+    @property
+    def avg_sentence_size(self):
+        return self.words_in_text / max(self.sentences_in_text, 1) # avoid zero division
 
     def _get_word_syllable_counter(self, filter=False):
         counter = Counter()
@@ -70,7 +83,7 @@ class TextAnalyzer():
             for word in self.text:
                 syllables = self._count_syllable_in_word(word)
                 counter[syllables] += 1
-        return counter
+        return counter.most_common(20)
 
     def _count_syllable_in_word(self, word):
         vowels = {'a', 'e', 'i', 'o', 'u'}
