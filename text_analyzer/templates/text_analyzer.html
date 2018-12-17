@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load text_analyzer_extras %}
 
 {% block title %} Text Analyzer {% endblock %}
 
@@ -20,11 +21,183 @@
               <label for="user_url">Enter URL of Text to analyze:</label>
               <input placeholder="A valid url.." class="form-control" name="user_url" id="user_url"
                      type="url"
-                      value="{% if user_url %}{{ user_url }}{% endif %}">
+                     value="{% if user_url %}{{ user_url }}{% endif %}">
             </div>
 
             <button type="submit" class="btn btn-primary">Analyze</button>
           </form>
+        </div>
+      </div>
+    </div>
+{#    {{ user_url_data }}#}
+    <div class="row my-3 {% if user_url_data == None %} d-none {% endif %}">
+      <div class="card mx-auto" style="width: 45rem;">
+        <h2 class="card-header">
+          URL Analysis
+        </h2>
+        <div class="card-body">
+          <h5 class="my-2">General data: </h5>
+          <table class="table table-sm table-bordered table-hover">
+
+            <tbody>
+            {% for data in user_url_data.basic_analysis %}
+              <tr>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Word Occurrences: </h5>
+          <table class="table table-sm table-bordered table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Word</th>
+              <th scope="col">Occurrences</th>
+              <th scope="col">Frequency</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in user_url_data.word_frequency %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+                <td>{% percentage numerator=data.1 denominator=user_url_data.total_words %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Syllable Counts: </h5>
+          <table class="table table-sm table-bordered table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Syllable Count</th>
+              <th scope="col">Word Count</th>
+              <th scope="col">Frequency</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in user_url_data.syllable_counter %}
+              <tr>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+                <td>{% percentage numerator=data.1 denominator=user_url_data.total_words %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Unfiltered Word Occurrences: </h5>
+            <table class="table table-sm table-bordered table-hover">
+              <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Word</th>
+                <th scope="col">Occurrences</th>
+                <th scope="col">Frequency</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for data in user_url_data.unfiltered_word_frequency %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ data.0 }}</td>
+                  <td>{{ data.1 }}</td>
+                  <td>{% percentage numerator=data.1 denominator=user_url_data.total_words %}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-3 {% if user_input_data == None %} d-none {% endif %}">
+      <div class="card mx-auto" style="width: 45rem;">
+        <h2 class="card-header">
+          Textarea Input Analysis
+        </h2>
+        <div class="card-body">
+          <h5 class="my-2">General data: </h5>
+          <table class="table table-sm table-bordered table-hover">
+
+            <tbody>
+            {% for data in user_input_data.basic_analysis %}
+              <tr>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Word Occurrences: </h5>
+          <table class="table table-sm table-bordered table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Word</th>
+              <th scope="col">Occurrences</th>
+              <th scope="col">Frequency</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in user_input_data.word_frequency %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+                <td>{% percentage numerator=data.1 denominator=user_input_data.total_words %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Syllable Counts: </h5>
+          <table class="table table-sm table-bordered table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Syllable Count</th>
+              <th scope="col">Word Count</th>
+              <th scope="col">Frequency</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in user_input_data.syllable_counter %}
+              <tr>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+                <td>{% percentage numerator=data.1 denominator=user_input_data.total_words %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <h5 class="my-2">Unfiltered Word Occurrences: </h5>
+            <table class="table table-sm table-bordered table-hover">
+              <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Word</th>
+                <th scope="col">Occurrences</th>
+                <th scope="col">Frequency</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for data in user_input_data.unfiltered_word_frequency %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ data.0 }}</td>
+                  <td>{{ data.1 }}</td>
+                  <td>{% percentage numerator=data.1 denominator=user_input_data.total_words %}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
