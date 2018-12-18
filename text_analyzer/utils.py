@@ -71,7 +71,7 @@ class TextAnalyzer():
 
     @property
     def avg_sentence_size(self):
-        return self.words_in_text / max(self.sentences_in_text, 1) # avoid zero division
+        return round( self.words_in_text / max(self.sentences_in_text, 1), 2) # using max function to avoid zero division
 
     def _get_word_syllable_counter(self, filter=False):
         counter = Counter()
