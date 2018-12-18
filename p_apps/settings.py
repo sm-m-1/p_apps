@@ -74,7 +74,7 @@ SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY','blob')
 DEFAULT_FROM_EMAIL = 'PacoApps-info@pacoapps.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-USER_SIGNUP_EMAIL_SUBJECT = 'Activate your PL Apps account.'
+USER_SIGNUP_EMAIL_SUBJECT = 'Activate your Paco Apps account.'
 
 ROOT_URLCONF = 'p_apps.urls'
 
