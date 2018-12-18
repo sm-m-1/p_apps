@@ -23,7 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x_#ip7$*b_imcul#!kf%1r-3mr95$o18td-7j7d&@x37@@2*d0'
+try:
+    SECRET_KEY = os.environ['SECRET_KEY']
+except KeyError:
+    from .local_settings import MY_LOCAL_SECRET_KEY
+    SECRET_KEY = MY_LOCAL_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -63,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# celery things
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
 
 
 LOGIN_REDIRECT_URL = 'home'
