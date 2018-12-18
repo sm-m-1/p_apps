@@ -31,6 +31,7 @@ except KeyError:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = [
     'https://boiling-headland-86603.herokuapp.com/',
