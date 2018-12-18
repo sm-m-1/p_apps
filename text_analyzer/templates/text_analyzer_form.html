@@ -1,40 +1,48 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% load text_analyzer_extras %}
 
 {% block title %} Text Analyzer {% endblock %}
 
 {% block content %}
-
-  <div class="container my-4">
+  <div class="container mt-5">
     <div class="row">
-      <div class="card mx-auto" style="width: 45rem;">
-        <h2 class="card-header my-0">Text Analyzer</h2>
-        <div class="card-body">
-          <form method="get" action="{% url 'text_analyzer_success' %}" class="">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="user_url">Enter URL of Text to analyze:</label>
-              <input placeholder="A valid url.." class="form-control" name="user_url" id="user_url"
-                     type="url"
-                     value="{% if user_url %}{{ user_url }}{% endif %}">
-            </div>
-            <div class="form-group">
-              <label for="user_essay"> Or input the text below:</label>
-              <textarea class="form-control" name="user_essay" id="user_essay" rows="5"
-                        placeholder="Enter text.."
-              >{% if user_essay %}{{ user_essay }}{% endif %}</textarea>
-            </div>
+        <div class="card mx-auto" style="width: 45rem;">
+          <h2 class="card-header my-0">Send a Future Email</h2>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              {#          {{ form.as_p }}#}
 
-            <button type="submit" class="btn btn-primary">Analyze</button>
-          </form>
+              <div class="form-group">
+                <label for="{{ form.user_url.id_for_label }}">Enter URL of Text to analyze:</label>
+                {% render_field form.user_url placeholder="A valid url.." class="form-control" %}
+              </div>
+
+              <div class="form-group">
+                <label for="{{ form.user_essay.id_for_label }}">Or input the text below:</label>
+                {% render_field form.user_essay placeholder="Enter text.." class="form-control" %}
+              </div>
+
+
+              <div class="form-group">
+                <h6 class="text-danger list-group-item-danger">
+                  {{ form.errors }}
+                  {{ form.user_url.errors }}
+                  {{ form.non_field_errors }}
+                </h6>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Analyze</button>
+            </form>
+          </div>
         </div>
-      </div>
     </div>
-{#    {{ user_url_data }}#}
+
     <div class="row my-3 {% if user_url_data == None %} d-none {% endif %}">
       <div class="card mx-auto" style="width: 45rem;">
         <h2 class="card-header">
-          URL Analysis
+          <a href="{{ user_url_data.url }}">URL </a> Analysis
         </h2>
         <div class="card-body">
           <h5 class="my-2">General data: </h5>
@@ -202,7 +210,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 
