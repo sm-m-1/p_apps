@@ -22,12 +22,14 @@ from accounts.views import (
     signup_success,
     contact_page_success,
     UserActivationView,
-    ContactFormView)
+    ContactFormView
+)
+
 from django.contrib.auth import views as auth_views
 from home.views import HomePageView
 
 from email_future.views import EmailAppFormView, email_form_success
-from text_analyzer.views import TextAnalyzerView
+from text_analyzer.views import TextAnalyzerFormView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -55,7 +57,7 @@ urlpatterns = [
 
 
     # text analyzer app
-    path('text_analyzer', TextAnalyzerView.as_view(), name='text_analyzer'),
+    path('text_analyzer/', TextAnalyzerFormView.as_view(), name='text_analyzer_form'),
 
 
 ]
