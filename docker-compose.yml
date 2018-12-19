@@ -4,7 +4,7 @@ services:
   celery:
     build: .
     environment:
-      - RABBITMQ_URL=${RABBITMQ_URL}
+      - RABBITMQ_URL=amqp://rabbitmq:5672
     command: celery -A p_apps worker --beat -l info --app=p_apps.celery --without-heartbeat
     volumes:
       - .:/code
@@ -15,7 +15,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     environment:
-      - RABBITMQ_URL=${RABBITMQ_URL}
+      - RABBITMQ_URL=amqp://rabbitmq:5672
     ports:
       - 5672
     volumes:
