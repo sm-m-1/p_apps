@@ -17,7 +17,8 @@ app.conf.update(
     # CELERY_ACCEPT_CONTENT = ['json'],
     # CELERY_TASK_SERIALIZER = 'json',
     # CELERY_RESULT_SERIALIZER = 'json',
-    broker_url = os.environ.get('CLOUDAMQP_URL', 'pyamqp://guest@localhost//'),
+    # broker_url = os.environ.get('CLOUDAMQP_URL', 'pyamqp://guest@localhost//'),
+    broker_url = os.environ['RABBITMQ_URL'],
     # broker_url = os.environ.get('REDIS_URL', 'pyamqp://guest@localhost//'),
     broker_pool_limit = 1, # Will decrease connection usage
     broker_heartbeat = None, # We're using TCP keep-alive instead

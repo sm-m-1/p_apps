@@ -1,12 +1,33 @@
 version: '3.7'
 
 services:
+  celery:
+    build: .
+    environment:
+      - RABBITMQ_URL=${RABBITMQ_URL}
+    command: celery -A p_apps worker --beat -l info --app=p_apps.celery --without-heartbeat
+    volumes:
+      - .:/code
+    depends_on:
+      - web
+      - rabbitmq
+      - db
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_URL=${RABBITMQ_URL}
+    ports:
+      - 5672
+    volumes:
+      - rabbitmq_data:/data
   db:
     image: postgres:10.1-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   web:
     build: .
+    environment:
+      - RABBITMQ_URL=${RABBITMQ_URL}
     command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
@@ -14,6 +35,8 @@ services:
       - 8000:8000
     depends_on:
       - db
+      - rabbitmq
 
 volumes:
   postgres_data:
+  rabbitmq_data:
