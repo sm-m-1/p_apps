@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
     SECRET_KEY = os.environ['SECRET_KEY']
-except ImportError:
+except (KeyError):
     from .local_settings import MY_LOCAL_SECRET_KEY
     SECRET_KEY = MY_LOCAL_SECRET_KEY
 
@@ -77,7 +77,12 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Email Related Settings.
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+try:
+    SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+except (KeyError):
+    from .local_settings import LOCAL_SENDGRID_API_KEY
+    SENDGRID_API_KEY = LOCAL_SENDGRID_API_KEY
+
 DEFAULT_FROM_EMAIL = 'PacoApps-info@pacoapps.com'
 CONTACT_TO_EMAIL = 'mashthemyth@gmail.com'
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
@@ -145,7 +150,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
