@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     'text_analyzer',
     'widget_tweaks',
     'django_celery_results',
-    # 'django_celery_beat',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
