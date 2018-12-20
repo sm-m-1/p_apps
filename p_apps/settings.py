@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     'https://boiling-headland-86603.herokuapp.com/',
     'https://pacoapps.herokuapp.com/',
     'http://www.pacoapps.com/',
+    '142.93.181.97',
     '*pacoapps.com',
     'www.pacoapps.com',
 ]
