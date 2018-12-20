@@ -19,8 +19,8 @@ app.conf.update(
     # CELERY_RESULT_SERIALIZER = 'json',
     broker_url = os.environ.get('CLOUDAMQP_URL', 'pyamqp://guest@localhost//'),
     # broker_url = os.environ.get('REDIS_URL', 'pyamqp://guest@localhost//'),
-    broker_pool_limit = 1, # Will decrease connection usage
-    broker_heartbeat = None, # We're using TCP keep-alive instead
+    broker_pool_limit = 2, # Will decrease connection usage
+    # broker_heartbeat = None, # We're using TCP keep-alive instead
     # broker_connection_timeout = 30, # May require a long timeout due to Linux DNS timeouts etc
     # result_backend = 'django-cache', # AMQP is not recommended as result backend as it creates thousands of queues
     # result_backend='rpc', # AMQP is not recommended as result backend as it creates thousands of queues
@@ -28,7 +28,7 @@ app.conf.update(
     result_persistent = False,
     event_queue_expires = 60, # Will delete all celeryev. queues without consumers after 1 minute.
     worker_prefetch_multiplier = 1, # Disable prefetching, it's causes problems and doesn't help performance
-    worker_concurrency = 3,
+    worker_concurrency = 5,
 
 )
 app.conf.beat_schedule = {
