@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
     SECRET_KEY = os.environ['SECRET_KEY']
-except KeyError:
+except ImportError:
     from .local_settings import MY_LOCAL_SECRET_KEY
     SECRET_KEY = MY_LOCAL_SECRET_KEY
 
