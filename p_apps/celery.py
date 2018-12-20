@@ -14,9 +14,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'p_apps.settings')
 app = Celery('p_apps')
 
 app.conf.update(
-    # CELERY_ACCEPT_CONTENT = ['json'],
-    # CELERY_TASK_SERIALIZER = 'json',
-    # CELERY_RESULT_SERIALIZER = 'json',
+    CELERY_ACCEPT_CONTENT = ['json'],
+    CELERY_TASK_SERIALIZER = 'json',
+    CELERY_RESULT_SERIALIZER = 'json',
     broker_url = os.environ.get('CLOUDAMQP_URL', 'pyamqp://guest@localhost//'),
     # broker_url = os.environ.get('REDIS_URL', 'pyamqp://guest@localhost//'),
     broker_pool_limit = 2, # Will decrease connection usage
