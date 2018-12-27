@@ -68,7 +68,7 @@ urlpatterns = [
 
     # note app
     path('note/all', NoteListView.as_view(), name='note_all'),
-    path('note/<id>/create', NoteCreateView.as_view(), name='note_create'),
+    path('note/create', NoteCreateView.as_view(), name='note_create'),
     path('note/<id>/delete', NoteDeleteView.as_view(), name='note_delete'),
     path('note/<id>/update', NoteUpdateView.as_view(), name='note_update'),
 

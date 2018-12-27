@@ -15,6 +15,11 @@ class NoteListView(ListView):
         queryset = super().get_queryset().filter(user=self.request.user)
         return queryset
 
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden("You have to sign in first.")
+        return super().get(request, *args, **kwargs)
+
 
 class NoteCreateView(CreateView):
     model = Note
@@ -49,3 +54,4 @@ class NoteUpdateView(UpdateView):
     success_url = reverse_lazy('note_all')
     pk_url_kwarg = 'id'
     fields = ['description', 'due_date']
+

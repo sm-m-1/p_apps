@@ -2,36 +2,35 @@
 {% block content %}
   <div class="container mt-3">
     <div class="row">
-      <div class="col">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <h3>Your notes are shown below. You can remove/edit them from here.</h3>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="alert alert-secondary mx-auto" style="width: 35rem;" role="alert">
+          <h3>Your notes:</h3>
         </div>
-      </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="card mx-auto">
-          <h3 class="card-header"> Your notes: </h3>
-          <div class="list-group">
-          {% if not object_list %}
-            <h3 class="m-3"> You have not created any notes yet. </h3>
-          {% endif %}
-          {% for object in object_list %}
-            <div class="list-group-item">
-              <p class="d-inline-block">
-                {{ object }}
+    <div class="">
+
+      {% if not object_list %}
+        <div class="card mx-auto" style="width: 35rem;">
+          <h3 class="m-3"> You have not created any notes yet. </h3>
+        </div>
+      {% endif %}
+      {% for object in object_list %}
+        <div class="row my-1">
+
+          <div class="card mx-auto" style="width: 35rem;">
+            <div class="card-body">
+              <p class="">
+                {{ object.description }}
               </p>
+              {% if object.due_date %}
+                <p> {{ object.due_date }}</p>
+              {% endif %}
               <a role="button" class="d-inline-block btn btn-outline-danger float-right" href="{{ object.get_delete_url }}"> Delete</a>
               <a role="button" class="d-inline-block btn btn-outline-info mr-2 float-right" href="{{ object.get_update_url }}"> Update</a>
             </div>
-          {% endfor %}
-
           </div>
         </div>
-      </div>
+      {% endfor %}
+
     </div>
   </div>
 
