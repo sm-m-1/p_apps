@@ -21,6 +21,15 @@ from django.core.mail import send_mail
 from p_apps import settings
 
 
+class GoogleLoginView(generic.TemplateView):
+    template_name = 'google-login-link.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['domain'] = get_current_site(self.request)
+        return context
+
+
 class SignUpFormView(generic.FormView):
     template_name = 'signup.html'
     form_class = SignUpForm

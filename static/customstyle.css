@@ -8,13 +8,9 @@ input, select, option {
     box-sizing: border-box;
 }
 
-/*select {*/
-    /*min-width:200px;*/
-    /*min-height: 34px;*/
-    /*border-color: rgba(50, 50, 50, 0.14);*/
-    /*border:1px solid #ccc;*/
-    /*vertical-align:top;*/
-/*}*/
+.google_sign_in_logo {
+    width: 12rem;
+}
 
 .navbar_apps_item_margin {
     margin-top: 0.75rem !important;

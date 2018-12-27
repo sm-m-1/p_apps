@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from accounts.views import (
     LoginFormView,
     SignUpFormView,
@@ -22,8 +22,8 @@ from accounts.views import (
     signup_success,
     contact_page_success,
     UserActivationView,
-    ContactFormView
-)
+    ContactFormView,
+    GoogleLoginView)
 
 from django.contrib.auth import views as auth_views
 
@@ -46,17 +46,17 @@ urlpatterns = [
     path('contact/success', contact_page_success, name='contact_page_success'),
     # path('', EmailPageView.as_view(), name='email_page'),
 
-    path('accounts/signup', SignUpFormView.as_view(), name='signup'),
-    path('accounts/login', LoginFormView.as_view(), name='login'),
-    path('accounts/logout', LogoutFormView.as_view(), name='logout'),
-    path('accounts/signup/success', signup_success, name='signup_success'),
-    path('accounts/signup/activate/', UserActivationView.as_view(), name='user_activate'),
-
-
-    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('accounts/password_reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # path('accounts/signup', SignUpFormView.as_view(), name='signup'),
+    # path('accounts/login', LoginFormView.as_view(), name='login'),
+    # path('accounts/logout', LogoutFormView.as_view(), name='logout'),
+    # path('accounts/signup/success', signup_success, name='signup_success'),
+    # path('accounts/signup/activate/', UserActivationView.as_view(), name='user_activate'),
+    #
+    #
+    # path('accounts/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    # path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    # path('accounts/password_reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # email app
     path('email/', EmailAppFormView.as_view(), name='email_app'),
@@ -71,5 +71,11 @@ urlpatterns = [
     path('note/create', NoteCreateView.as_view(), name='note_create'),
     path('note/<id>/delete', NoteDeleteView.as_view(), name='note_delete'),
     path('note/<id>/update', NoteUpdateView.as_view(), name='note_update'),
+
+
+    # allauth
+    path('accounts/', include('allauth.urls')),
+    path('logout/', LogoutFormView.as_view(), name='logout'),
+    path('login/', GoogleLoginView.as_view(), name='login')
 
 ]

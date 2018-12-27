@@ -36,11 +36,6 @@ class NoteCreateView(CreateView):
             return HttpResponseForbidden("You have to sign in first.")
         return super().post(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden("You have to sign in first.")
-        return super().get(request, *args, **kwargs)
-
 
 class NoteDeleteView(DeleteView):
     model = Note
