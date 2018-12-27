@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Update{% endblock %}
+{% block content %}
+  <div class="container mt-5">
+    <div class="row">
+
+      <div class="card mx-auto" style="width: 35rem;">
+        <h1 class="card-header my-0">Update note</h1>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+{#            {{ form.as_p }}#}
+
+            <div class="form-group">
+              <label for="{{ form.description.id_for_label }}">Description:</label>
+              {% render_field form.description class="form-control" %}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ form.due_date.id_for_label }}">Due Date: (optional)</label>
+              {% render_field form.due_date class="form-control" type="date" %}
+            </div>
+
+            <div class="form-group">
+              <h6 class="text-danger list-group-item-danger">
+                {{ form.errors }}
+                {{ form.non_field_errors }}
+              </h6>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

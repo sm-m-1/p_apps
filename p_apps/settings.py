@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'p_apps',
     'accounts',
+    'do_list',
     'email_future',
     'text_analyzer',
     'widget_tweaks',

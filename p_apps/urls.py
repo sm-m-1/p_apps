@@ -26,6 +26,13 @@ from accounts.views import (
 )
 
 from django.contrib.auth import views as auth_views
+
+from do_list.views import (
+    NoteListView,
+    NoteCreateView,
+    NoteDeleteView,
+    NoteUpdateView,
+)
 from home.views import HomePageView
 
 from email_future.views import EmailAppFormView, email_form_success
@@ -59,5 +66,10 @@ urlpatterns = [
     # text analyzer app
     path('text_analyzer/', TextAnalyzerFormView.as_view(), name='text_analyzer_form'),
 
+    # note app
+    path('note/all', NoteListView.as_view(), name='note_all'),
+    path('note/<id>/create', NoteCreateView.as_view(), name='note_create'),
+    path('note/<id>/delete', NoteDeleteView.as_view(), name='note_delete'),
+    path('note/<id>/update', NoteUpdateView.as_view(), name='note_update'),
 
 ]
