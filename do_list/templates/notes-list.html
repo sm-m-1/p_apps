@@ -2,17 +2,12 @@
 {% block content %}
   <div class="container mt-2">
     <div class="row mb-2">
-      <div class="mx-auto" style="width: 35rem;">
+      <div class="container">
         <a class="btn btn-outline-success" href="{% url 'note_create' %}" role="button">Create Note</a>
       </div>
     </div>
-    <div class="row">
-        <div class="alert alert-secondary mx-auto" style="width: 35rem;" role="alert">
-          <h3>Your notes:</h3>
-        </div>
-    </div>
-    <div class="">
-
+    <h6>notes</h6>
+    <div class="card-columns">
       {% if not object_list %}
         <div class="card mx-auto" style="width: 35rem;">
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -25,24 +20,23 @@
         </div>
       {% endif %}
       {% for object in object_list %}
-        <div class="row my-1">
+        <div class="card">
+          <div class="card-body">
+            <p class="">
+              {{ object.description }}
+            </p>
+            {% if object.due_date %}
+              <p> Due: {{ object.due_date }}</p>
+            {% endif %}
 
-          <div class="card mx-auto" style="width: 35rem;">
-            <div class="card-body">
-              <p class="">
-                {{ object.description }}
-              </p>
-              {% if object.due_date %}
-                <p> Due: {{ object.due_date }}</p>
-              {% endif %}
-              <a role="button" class="d-inline-block btn btn-outline-danger float-right" href="{{ object.get_delete_url }}"> Delete</a>
-              <a role="button" class="d-inline-block btn btn-outline-info mr-2 float-right" href="{{ object.get_update_url }}"> Update</a>
-            </div>
+            <a role="button" class="btn btn-outline-danger float-right mb-3" href="{{ object.get_delete_url }}"> Delete</a>
+            <a role="button" class="btn btn-outline-info mr-1 float-right mb-3" href="{{ object.get_update_url }}"> Update</a>
           </div>
         </div>
       {% endfor %}
 
     </div>
+
   </div>
 
   <script>
