@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
+  <div class="container mt-1">
   {% if request.user.is_authenticated %}
       <div class="card center-block" style="width: 35rem;">
       <h1 class="card-header my-0">Welcome</h1>
@@ -11,8 +11,8 @@
       </div>
     </div>
     {% endif %}
-      <div class="d-flex flex-row flex-wrap">
-        <div class="card mr-2 my-5" style="width: 20rem;">
+      <div class="d-flex flex-row align-items-start flex-wrap">
+        <div class="card mr-2 my-2" style="width: 20rem;">
           <a href="{% url 'note_create' %}">
             <img class="card-img-top" src="/static/notes_app_screenshot.png" alt="email_">
           </a>
@@ -22,12 +22,12 @@
               Web app that allows users to create, update, view, and delete notes.
             </p>
             <p>Built with Python, Django.</p>
-            <div class="container_footer">
+            <div class="">
               <a href="{% url 'note_create' %}" class="btn btn-primary mt-auto">Create notes!</a>
             </div>
           </div>
         </div>
-        <div class="card mr-2 my-5" style="width: 20rem;">
+        <div class="card mr-2 my-2" style="width: 20rem;">
           <a href="{% url 'text_analyzer_form' %}">
             <img class="card-img-top" src="/static/analyze_logo.png" alt="email_">
           </a>
@@ -38,13 +38,12 @@
               statistics about the given URL article or text.
             </p>
             <p>Built with Python, Django.</p>
-            <div class="container_footer">
+            <div class="">
               <a href="{% url 'text_analyzer_form' %}" class="btn btn-primary mt-auto">Visit the web app!</a>
-
             </div>
           </div>
         </div>
-        <div class="card mr-2 my-5" style="width: 20rem;">
+        <div class="card mr-2 my-2" style="width: 20rem;">
           <a href="{% url 'email_app' %}">
             <img class="card-img-top" src="/static/email_logo.png" alt="email_">
           </a>
@@ -55,7 +54,7 @@
               You may use it to send someone a wish for their birthday or send yourself a reminder.
             </p>
             <p>Built with Python, Django, Celery, RabbitMQ</p>
-            <div class="container_footer">
+            <div class="">
               <a href="{% url 'email_app' %}" class="btn btn-primary mt-auto">Visit the web app!</a>
 
             </div>
