@@ -6,8 +6,10 @@ celery==4.2.1
 certifi==2018.8.24
 chardet==3.0.4
 decorator==4.3.0
+defusedxml==0.5.0
 dj-database-url==0.5.0
 Django==2.1.4
+django-allauth==0.38.0
 django-celery-beat==1.4.0
 django-celery-results==1.0.4
 django-extensions==2.1.2
@@ -24,6 +26,7 @@ ipython==6.5.0
 ipython-genutils==0.2.0
 jedi==0.12.1
 kombu==4.2.2
+oauthlib==2.1.0
 parso==0.3.1
 pexpect==4.6.0
 pickleshare==0.7.4
@@ -36,9 +39,11 @@ Pygments==2.2.0
 python-crontab==2.3.5
 python-dateutil==2.7.5
 python-http-client==3.1.0
+python3-openid==3.1.0
 pytz==2018.5
 redis==3.0.1
 requests==2.21.0
+requests-oauthlib==1.0.0
 sendgrid==5.6.0
 simplegeneric==0.8.1
 six==1.11.0
