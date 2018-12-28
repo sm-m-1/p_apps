@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container mt-3">
+  <div class="container mt-2">
+    <div class="row mb-2">
+      <div class="mx-auto" style="width: 35rem;">
+        <a class="btn btn-outline-success" href="{% url 'note_create' %}" role="button">Create Note</a>
+      </div>
+    </div>
     <div class="row">
         <div class="alert alert-secondary mx-auto" style="width: 35rem;" role="alert">
           <h3>Your notes:</h3>
@@ -10,7 +15,13 @@
 
       {% if not object_list %}
         <div class="card mx-auto" style="width: 35rem;">
-          <h3 class="m-3"> You have not created any notes yet. </h3>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h6 class="m-3"> You have not created any notes yet.</h6>
+            <h6 class="m-3">Click the button above to create a new note.</h6>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
       {% endif %}
       {% for object in object_list %}
@@ -22,7 +33,7 @@
                 {{ object.description }}
               </p>
               {% if object.due_date %}
-                <p> {{ object.due_date }}</p>
+                <p> Due: {{ object.due_date }}</p>
               {% endif %}
               <a role="button" class="d-inline-block btn btn-outline-danger float-right" href="{{ object.get_delete_url }}"> Delete</a>
               <a role="button" class="d-inline-block btn btn-outline-info mr-2 float-right" href="{{ object.get_update_url }}"> Update</a>

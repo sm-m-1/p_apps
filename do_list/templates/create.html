@@ -2,9 +2,13 @@
 {% load widget_tweaks %}
 {% block title %}Create Note{% endblock %}
 {% block content %}
-  <div class="container mt-5">
+  <div class="container mt-2">
+    <div class="row mb-2">
+      <div class="mx-auto" style="width: 35rem;">
+        <a class="btn btn-outline-secondary" href="{% url 'note_all' %}" role="button">All notes</a>
+      </div>
+    </div>
     <div class="row">
-
       <div class="card mx-auto" style="width: 35rem;">
         <h1 class="card-header my-0">Create a note</h1>
         {% if request.user.is_authenticated %}

@@ -12,7 +12,7 @@ class NoteListView(ListView):
     template_name = 'notes-list.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
+        queryset = super().get_queryset().filter(user=self.request.user).order_by('-created_on')
         return queryset
 
     def get(self, request, *args, **kwargs):
