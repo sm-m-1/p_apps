@@ -19,13 +19,13 @@
               Apps
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'email_app' %}">
-                Future Email</a>
+              <a class="dropdown-item" href="{% url 'note_create' %}">Notes</a>
               <div class="dropdown-divider"> Text Analyzer </div>
               <a class="dropdown-item" href="{% url 'text_analyzer_form' %}">
                 Text Analyzer</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'note_create' %}">Notes</a>
+              <a class="dropdown-item" href="{% url 'email_app' %}">
+                Future Email</a>
             </div>
           </li>
         {% if request.user.is_authenticated %}
